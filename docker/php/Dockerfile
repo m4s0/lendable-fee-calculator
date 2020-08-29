@@ -9,6 +9,7 @@ RUN apk --update --no-cache add bash \
    && apk add php7-iconv \
    && apk add php7-ctype \
    && apk add php7-posix \
+   && apk add php7-json \
    && apk add php7-intl \
    && apk add php7-opcache  \
    && apk add make \

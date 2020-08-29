@@ -134,3 +134,15 @@ run tests
 ```
 make test
 ``` 
+
+#### Coding Standards
+
+```
+make cs
+``` 
+
+#### Static Code Analysis
+
+```
+make stan
+``` 
