@@ -120,3 +120,17 @@ install dependencies
 ```
 make install
 ``` 
+
+#### Tests
+
+Application has been designed using a Test Driven Design approach and PHPUnit
+
+Enter into php container
+```
+docker-compose run php bash
+```
+
+run tests
+```
+make test
+``` 
