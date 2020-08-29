@@ -1,8 +1,9 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Lendable\Interview\Interpolation\Model;
+
+use Lendable\Interview\Interpolation\Exception\LoanApplicationException;
+use Money\Money;
 
 /**
  * A cut down version of a loan application containing
@@ -10,35 +11,32 @@ namespace Lendable\Interview\Interpolation\Model;
  */
 class LoanApplication
 {
-    /**
-     * @var int
-     */
-    private $term;
+    private Money $amount;
+    private Term $term;
 
-    /**
-     * @var float
-     */
-    private $amount;
-
-    public function __construct(int $term, float $amount)
+    public function __construct(Term $term, Money $amount)
     {
+        if ($amount->isNegative()) {
+            throw new LoanApplicationException('Amount not valid');
+        }
+
         $this->term = $term;
         $this->amount = $amount;
     }
 
     /**
-     * Term (loan duration) for this loan application
-     * in number of months.
+     * Term (loan duration) for this loan application.
      */
-    public function term(): int
+    public function term(): Term
     {
         return $this->term;
     }
 
     /**
+     *
      * Amount requested for this loan application.
      */
-    public function amount(): float
+    public function amount(): Money
     {
         return $this->amount;
     }
