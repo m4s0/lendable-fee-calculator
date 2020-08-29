@@ -20,13 +20,6 @@ to your solution.
 Treat the packaged code as a template, if you feel that your solution can be
 improved with modifications to it then please go ahead.
 
-# Installation
-A database or any other external dependency is not required for this test.
-
-```bash
-composer install
-``` 
-
 # Example
 ```php
 <?php
@@ -91,3 +84,39 @@ The fee structure doesn't follow particular algorithm and it is possible that sa
 £19000: £760
 £20000: £800
 ```
+
+# Application
+Application runs with PHP 7.4
+
+#### Docker
+
+```
+cd docker
+```
+
+Build container
+```
+docker-compose build
+```
+
+Run container
+```
+docker-compose up -d
+```
+
+Enter into php container
+```
+docker-compose run php bash
+```
+
+#### Init Application
+
+Enter into php container
+```
+docker-compose run php bash
+```
+
+install dependencies
+```
+make install
+``` 

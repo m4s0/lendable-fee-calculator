@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  php:
+    container_name: php
+    build:
+      context: ./php
+    environment:
+      - XDEBUG_CONFIG=${XDEBUG_CONFIG}
+      - PHP_IDE_CONFIG=${PHP_IDE_CONFIG}
+    volumes:
+      - ../app:/var/app
