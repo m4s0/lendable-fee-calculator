@@ -64,4 +64,42 @@ class Term
 
         throw new TermAmountNotFoundException('Amount not found');
     }
+
+    public function getNearestLowerAmount(Money $money): Money
+    {
+        $amount = (int)$money->getAmount();
+
+        $lowerAmount = 0;
+        foreach ($this->breakpoints as $breakpoint => $fee) {
+            if ($amount === $breakpoint) {
+                return new Money($amount, $this->currency);
+            }
+
+            $i = $breakpoint - $amount;
+            if ($i < 0 && ($breakpoint > $lowerAmount || 0 === $lowerAmount)) {
+                $lowerAmount = $breakpoint;
+            }
+        }
+
+        return new Money($lowerAmount, $this->currency);
+    }
+
+    public function getNearestUpperAmount(Money $money): Money
+    {
+        $amount = (int)$money->getAmount();
+
+        $upperAmount = 0;
+        foreach ($this->breakpoints as $breakpoint => $fee) {
+            if ($amount === $breakpoint) {
+                return new Money($amount, $this->currency);
+            }
+
+            $i = $breakpoint - $amount;
+            if ($i > 0 && ($breakpoint < $upperAmount || 0 === $upperAmount)) {
+                $upperAmount = $breakpoint;
+            }
+        }
+
+        return new Money($upperAmount, $this->currency);
+    }
 }

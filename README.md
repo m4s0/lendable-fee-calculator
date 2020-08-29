@@ -26,11 +26,11 @@ improved with modifications to it then please go ahead.
 
 use Lendable\Interview\Interpolation\Model\LoanApplication;
 
-$calculator = new FeeCalculator();
+$calculator = new FeeCalculator(new LinearInterpolation(), new RoundUp());
 
-$application = new LoanApplication(24, 2750);
-$fee = $calculator->calculate($application);
-// $fee = (float) 115.0
+$application = new LoanApplication(Term24::create(), Money::GBP(275000));
+$calculator->calculate($application);
+// $fee = Money::GBP(11500)
 ```
 
 # Fee Structure

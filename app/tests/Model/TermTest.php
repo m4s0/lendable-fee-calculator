@@ -90,4 +90,28 @@ class TermTest extends TestCase
 
         Assert::assertEquals(Money::GBP(200000), $term->getHighestAmount());
     }
+
+    /** @test */
+    public function should_get_nearest_lower_amount(): void
+    {
+        $term = new Term(new Currency('GBP'));
+        $term->addBreakpoint(Money::GBP(100000), Money::GBP(5000));
+        $term->addBreakpoint(Money::GBP(200000), Money::GBP(10000));
+
+        Assert::assertEquals(Money::GBP(100000), $term->getNearestLowerAmount(Money::GBP(100000)));
+        Assert::assertEquals(Money::GBP(100000), $term->getNearestLowerAmount(Money::GBP(100001)));
+        Assert::assertEquals(Money::GBP(100000), $term->getNearestLowerAmount(Money::GBP(199999)));
+    }
+
+    /** @test */
+    public function should_get_nearest_upper_amount(): void
+    {
+        $term = new Term(new Currency('GBP'));
+        $term->addBreakpoint(Money::GBP(100000), Money::GBP(5000));
+        $term->addBreakpoint(Money::GBP(200000), Money::GBP(10000));
+
+        Assert::assertEquals(Money::GBP(200000), $term->getNearestUpperAmount(Money::GBP(200000)));
+        Assert::assertEquals(Money::GBP(200000), $term->getNearestUpperAmount(Money::GBP(100001)));
+        Assert::assertEquals(Money::GBP(200000), $term->getNearestUpperAmount(Money::GBP(199999)));
+    }
 }
